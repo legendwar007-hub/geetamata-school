@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shree Geetamata Secondary School</title>
+<style>
+:root{--p:#1e3a8a;--pd:#162c6a;--bg:#f4f6fb;--c:#fff;--t:#1f2937;--m:#6b7280;--d:#111827;--g:#f59e0b;--glass:rgba(255,255,255,0.88);--shadow-sm:0 2px 8px rgba(0,0,0,.06);--shadow-md:0 8px 30px rgba(0,0,0,.08);--shadow-lg:0 20px 60px rgba(0,0,0,.12);--radius:16px;--radius-sm:12px}
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI","Mukta",Arial,sans-serif}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{background:var(--bg);color:var(--t);line-height:1.6}
+.icon{width:18px;height:18px;display:inline-block;vertical-align:middle;flex-shrink:0}
+.icon-sm{width:14px;height:14px}
+.icon-lg{width:24px;height:24px}
+.icon-xl{width:32px;height:32px}
+.icon-2xl{width:48px;height:48px}
+.reveal{opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.4,0,.2,1)}
+.reveal.active{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.15s}
+.top-bar{background:var(--d);color:#d1d5db;font-size:13px;padding:10px 30px;display:flex;justify-content:center;align-items:center;gap:28px;flex-wrap:wrap}
+.top-bar a{color:#d1d5db;text-decoration:none;transition:.3s;display:flex;align-items:center;gap:8px;font-weight:500}
+.top-bar a:hover{color:#fff;transform:translateY(-1px)}
+.lang-switch{background:var(--p);color:#fff;border:none;padding:6px 16px;border-radius:24px;cursor:pointer;font-size:12px;font-weight:600;transition:.3s;display:flex;align-items:center;gap:6px}
+.lang-switch:hover{background:var(--pd);transform:scale(1.05);box-shadow:0 4px 15px rgba(30,58,138,.3)}
+.lang-switch.nepali-active{background:#d97706}
+header{position:sticky;top:0;background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;justify-content:space-between;align-items:center;padding:12px 30px;box-shadow:var(--shadow-sm);z-index:1000;transition:.3s;border-bottom:1px solid rgba(0,0,0,.05)}
+header.scrolled{padding:8px 30px;box-shadow:var(--shadow-md);background:rgba(255,255,255,.96)}
+.logo-area{display:flex;align-items:center;gap:14px}
+.logo-img{width:48px;height:48px;border-radius:50%;object-fit:cover;border:3px solid #e5e7eb;transition:.3s;box-shadow:0 4px 15px rgba(0,0,0,.1)}
+header.scrolled .logo-img{width:38px;height:38px}
+.logo-text{font-weight:800;font-size:17px;color:var(--p);line-height:1.2;letter-spacing:-.3px}
+.logo-tagline{font-size:10px;color:var(--m);font-weight:600;letter-spacing:1.5px;text-transform:uppercase}
+nav ul{display:flex;gap:6px;list-style:none;align-items:center}
+nav a{text-decoration:none;color:#374151;font-size:13px;font-weight:600;padding:9px 14px;border-radius:8px;transition:.25s;cursor:pointer;display:flex;align-items:center;gap:7px}
+nav a:hover{color:var(--p);background:#f0f4ff;transform:translateY(-1px)}
+nav a.active-link{color:var(--p);background:#eff6ff;font-weight:700}
+.dropdown{position:relative}
+.dropdown-menu{display:none;position:absolute;top:calc(100% + 8px);left:0;background:#fff;min-width:200px;border-radius:var(--radius-sm);box-shadow:var(--shadow-lg);padding:8px;z-index:1001;animation:dropdownSlide .25s ease;border:1px solid rgba(0,0,0,.04)}
+@keyframes dropdownSlide{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.dropdown:hover .dropdown-menu{display:block}
+.dropdown-menu a{display:block;padding:10px 16px;font-size:13px;border-radius:8px;margin:2px 0}
+.dropdown-menu a:hover{background:#f0f4ff}
+.menu-toggle{display:none;background:none;border:none;font-size:26px;cursor:pointer;color:var(--p);z-index:1002;padding:5px}
+.overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.4);backdrop-filter:blur(4px);z-index:999}
+.overlay.active{display:block}
+.hero{height:92vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px;color:#fff;position:relative;background:linear-gradient(135deg,rgba(17,24,39,.75),rgba(30,58,138,.7)),url('https://i.postimg.cc/50zTGDxK/IMG-20260617-174740.jpg') center/cover}
+.hero::before{content:'';position:absolute;bottom:0;left:0;right:0;height:120px;background:linear-gradient(to top,var(--bg),transparent);z-index:1}
+.hero > *{position:relative;z-index:2}
+.hero-logo{width:110px;height:110px;border-radius:50%;object-fit:cover;border:4px solid rgba(255,255,255,.95);margin-bottom:24px;box-shadow:0 12px 50px rgba(0,0,0,.4),0 0 0 4px rgba(255,255,255,.2);animation:fi .8s ease}
+@keyframes fi{from{opacity:0;transform:translateY(30px) scale(.9)}to{opacity:1;transform:translateY(0) scale(1)}}
+.hero h1{font-size:46px;max-width:850px;animation:fi .8s .2s both;text-shadow:0 4px 20px rgba(0,0,0,.4);font-weight:800;line-height:1.15;letter-spacing:-.5px}
+.hero p{margin-top:16px;font-size:18px;opacity:.95;animation:fi .8s .4s both;max-width:600px;line-height:1.6}
+.hero .btn-group{display:flex;gap:14px;margin-top:28px;flex-wrap:wrap;justify-content:center;animation:fi .8s .6s both}
+.hero button{padding:14px 30px;border:2px solid rgba(255,255,255,.9);background:transparent;color:#fff;border-radius:30px;cursor:pointer;font-weight:700;font-size:14px;transition:.35s;display:flex;align-items:center;gap:8px;backdrop-filter:blur(10px)}
+.hero button:hover{background:#fff;color:var(--p);transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.2)}
+.hero button.primary-btn{background:var(--p);border-color:var(--p);box-shadow:0 8px 25px rgba(30,58,138,.4)}
+.hero button.primary-btn:hover{background:var(--pd);border-color:var(--pd);color:#fff;box-shadow:0 12px 35px rgba(30,58,138,.5)}
+.scroll-indicator{position:absolute;bottom:35px;left:50%;transform:translateX(-50%);animation:bounce 2.2s infinite;cursor:pointer;z-index:2;background:rgba(255,255,255,.15);width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);transition:.3s}
+.scroll-indicator:hover{background:rgba(255,255,255,.25)}
+.scroll-indicator svg{width:20px;height:20px;stroke:#fff;stroke-width:2;fill:none}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-18px)}}
+section{padding:80px 25px;max-width:1140px;margin:auto}
+.section-title{text-align:center;font-size:32px;margin-bottom:45px;color:var(--p);position:relative;font-weight:800;letter-spacing:-.5px;display:flex;align-items:center;justify-content:center;gap:12px}
+.section-title::after{content:'';display:block;width:60px;height:4px;background:var(--g);margin:12px auto 0;border-radius:4px;position:absolute;bottom:-16px;left:50%;transform:translateX(-50%)}
+.about-box{background:var(--c);padding:40px;border-radius:var(--radius);box-shadow:var(--shadow-md);line-height:1.9;border:1px solid rgba(0,0,0,.04);position:relative;overflow:hidden}
+.about-box::before{content:'';position:absolute;top:0;left:0;width:5px;height:100%;background:var(--g)}
+.est-badge{display:inline-flex;align-items:center;gap:8px;background:var(--g);color:var(--d);padding:8px 20px;border-radius:24px;font-size:14px;font-weight:800;margin-bottom:20px;box-shadow:0 4px 15px rgba(245,158,11,.3)}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:18px;margin-bottom:60px}
+.stat-box{background:var(--c);padding:28px 16px;border-radius:var(--radius-sm);text-align:center;box-shadow:var(--shadow-sm);transition:.3s;border:1px solid rgba(0,0,0,.04);position:relative;overflow:hidden}
+.stat-box::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--p);opacity:0;transition:.3s}
+.stat-box:hover{transform:translateY(-6px);box-shadow:var(--shadow-md)}
+.stat-box:hover::before{opacity:1}
+.stat-box .stat-icon{margin-bottom:12px;display:flex;justify-content:center}
+.stat-box .stat-num{font-size:38px;font-weight:900;color:var(--p);line-height:1}
+.stat-box .stat-label{font-size:13px;color:var(--m);margin-top:8px;font-weight:600}
+.admin-card{background:var(--c);border-radius:var(--radius);box-shadow:var(--shadow-md);margin-bottom:22px;border:1px solid rgba(0,0,0,.04);overflow:hidden;transition:.3s}
+.admin-card:hover{box-shadow:var(--shadow-lg)}
+.admin-card-header{display:flex;gap:28px;align-items:center;padding:28px;cursor:pointer;transition:.2s}
+.admin-card-header:hover{background:#fafbfc}
+.admin-card-header img{width:130px;height:130px;border-radius:50%;object-fit:cover;border:4px solid #e5e7eb;flex-shrink:0;box-shadow:0 6px 20px rgba(0,0,0,.1)}
+.admin-card-content h3{color:var(--p);margin-bottom:6px;font-size:19px;font-weight:800}
+.admin-card-content .role{color:var(--m);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.admin-card-content .quote-preview{font-style:italic;font-size:16px;color:#374151;border-left:4px solid var(--g);padding:10px 16px;background:#fef9f0;border-radius:0 8px 8px 0;display:flex;align-items:center;gap:10px}
+.admin-card-content .expand-hint{font-size:12px;color:var(--m);margin-top:10px;display:flex;align-items:center;gap:5px;font-weight:500}
+.admin-card-body{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1),padding .5s;padding:0 28px}
+.admin-card-body.open{max-height:600px;padding:0 28px 28px}
+.admin-card-body p{font-size:15px;line-height:1.8;color:#4b5563}
+.admin-card-body .story-title{font-weight:700;color:var(--p);margin-bottom:8px;font-size:16px;display:flex;align-items:center;gap:8px}
+.admin-card-body .story-text{background:#f8fafc;padding:20px;border-radius:12px;border-left:3px solid var(--p)}
+.expand-icon{margin-left:auto;transition:transform .3s;color:var(--m)}
+.admin-card.open .expand-icon{transform:rotate(180deg)}
+.incharge-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.incharge-card{background:var(--c);padding:28px;border-radius:var(--radius-sm);text-align:center;box-shadow:var(--shadow-sm);transition:.3s;border:1px solid rgba(0,0,0,.04)}
+.incharge-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-md)}
+.incharge-card .incharge-icon{margin-bottom:14px;display:flex;justify-content:center}
+.incharge-card h4{color:var(--p);margin-bottom:6px;font-size:17px;font-weight:800}
+.incharge-card .role{color:var(--m);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px}
+.programs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.program-card{background:var(--c);padding:28px;border-radius:var(--radius);box-shadow:var(--shadow-sm);text-align:center;border:1px solid rgba(0,0,0,.04);transition:.3s;cursor:default}
+.program-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-md)}
+.program-card .program-icon{margin-bottom:14px;display:flex;justify-content:center}
+.program-card h3{color:var(--p);font-size:18px;margin-bottom:10px;font-weight:800}
+.program-card p{font-size:14px;color:#4b5563;line-height:1.7}
+.facility-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+.facility-box{background:var(--c);padding:26px 14px;border-radius:var(--radius-sm);text-align:center;font-weight:700;font-size:14px;box-shadow:var(--shadow-sm);cursor:pointer;transition:.3s;border:2px solid transparent;user-select:none;display:flex;flex-direction:column;align-items:center;gap:10px}
+.facility-box .facility-icon{display:flex;justify-content:center}
+.facility-box:hover{transform:translateY(-5px);border-color:var(--p);box-shadow:var(--shadow-md)}
+.facility-box.active{background:var(--p);color:#fff;border-color:var(--p);box-shadow:0 10px 30px rgba(30,58,138,.3)}
+.facility-preview{display:none;margin-top:22px;background:var(--c);padding:30px;border-radius:var(--radius);box-shadow:var(--shadow-md);animation:fi2 .35s ease;border:1px solid rgba(0,0,0,.04)}
+.facility-preview.show{display:block}
+@keyframes fi2{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
+.facility-preview h3{color:var(--p);margin-bottom:10px;font-size:21px;font-weight:800;display:flex;align-items:center;gap:10px}
+.facility-preview p{line-height:1.7;color:#4b5563;margin-bottom:14px;font-size:15px}
+.facility-preview .preview-images{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.facility-preview .preview-images img{width:100%;height:150px;object-fit:cover;border-radius:12px;transition:.3s}
+.facility-preview .preview-images img:hover{transform:scale(1.03);box-shadow:0 8px 20px rgba(0,0,0,.15)}
+.notices-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.notice-card{background:var(--c);padding:24px;border-radius:var(--radius);box-shadow:var(--shadow-sm);border:1px solid rgba(0,0,0,.04);transition:.3s}
+.notice-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.notice-card .notice-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.notice-card .notice-badge{background:var(--g);color:var(--d);padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700}
+.notice-card .notice-badge.event{background:var(--p);color:#fff}
+.notice-card .notice-date{color:var(--m);font-size:13px}
+.notice-card h3{color:var(--p);font-size:17px;margin-bottom:10px;font-weight:700}
+.notice-card p{font-size:14px;color:#4b5563;line-height:1.7}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.gallery img{width:100%;height:180px;object-fit:cover;border-radius:14px;transition:.4s;cursor:pointer;box-shadow:var(--shadow-sm)}
+.gallery img:hover{transform:scale(1.03) translateY(-4px);box-shadow:var(--shadow-lg)}
+.contact{background:var(--c);padding:40px;border-radius:var(--radius);box-shadow:var(--shadow-md);text-align:center;line-height:2.4;border:1px solid rgba(0,0,0,.04)}
+.contact p{font-size:16px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+.contact a{color:var(--p);text-decoration:none;font-weight:700;transition:.2s}
+.contact a:hover{color:var(--pd);text-decoration:underline}
+.map-container{margin-top:28px;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-md);height:380px;border:1px solid rgba(0,0,0,.06)}
+.map-container iframe{width:100%;height:100%;border:0}
+footer{text-align:center;padding:35px 20px;background:var(--d);color:#9ca3af;font-size:13px;margin-top:50px;line-height:1.8}
+footer .footer-links{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+footer .footer-links a{color:#9ca3af;text-decoration:none;transition:.25s;font-weight:500;display:flex;align-items:center;gap:6px}
+footer .footer-links a:hover{color:#fff;transform:translateY(-2px)}
+.back-to-top{position:fixed;bottom:28px;right:28px;width:48px;height:48px;background:var(--p);color:#fff;border:none;border-radius:50%;cursor:pointer;z-index:998;opacity:0;transition:.35s;box-shadow:0 6px 20px rgba(30,58,138,.3);display:flex;align-items:center;justify-content:center}
+.back-to-top.visible{opacity:1}
+.back-to-top:hover{background:var(--pd);transform:translateY(-4px);box-shadow:0 10px 30px rgba(30,58,138,.4)}
+.ne{display:none}
+body.show-ne .en{display:none}
+body.show-ne .ne{display:inline}
+@media(max-width:768px){
+.top-bar{gap:10px;font-size:11px;padding:8px 12px}
+.menu-toggle{display:block}
+nav ul{display:flex;position:fixed;top:0;right:-300px;width:280px;height:100vh;background:#fff;flex-direction:column;padding:75px 20px 20px;box-shadow:-4px 0 30px rgba(0,0,0,.2);text-align:left;gap:4px;z-index:1001;transition:right .35s;overflow-y:auto}
+nav ul.active{right:0}
+nav ul li{width:100%}
+nav ul li a{display:block;padding:14px;font-size:14px;border-radius:10px}
+.dropdown-menu{position:static;box-shadow:none;display:none;padding-left:14px;background:#f8fafc;border-radius:8px;margin-top:4px}
+.dropdown.active .dropdown-menu{display:block}
+.hero h1{font-size:28px}
+.hero p{font-size:15px}
+.hero-logo{width:80px;height:80px}
+.logo-text{font-size:14px}
+.admin-card-header{flex-direction:column;text-align:center}
+.admin-card-header img{width:110px;height:110px}
+.admin-card-content .quote-preview{border-left:none;border-top:4px solid var(--g);padding:10px 0 0 0;border-radius:8px 8px 0 0}
+.stat-box .stat-num{font-size:28px}
+.stat-box{padding:20px 12px}
+.facility-grid{grid-template-columns:repeat(auto-fit,minmax(140px,1fr))}
+.facility-box{padding:20px 10px;font-size:13px}
+.map-container{height:280px}
+section{padding:50px 16px}
+.section-title{font-size:24px}
+.about-box{padding:24px}
+.contact{padding:24px}
+.contact p{justify-content:flex-start}
+.programs-grid{grid-template-columns:1fr}
+.notices-grid{grid-template-columns:1fr}
+.incharge-grid{grid-template-columns:1fr}
+}
+</style>
+<!-- SEO & Social Media Meta Tags -->
+<meta name="description" content="Shree Geetamata Secondary School - Established 1961 in Bijeshwori, Dallu, Kathmandu. Excellence, Discipline & Growth. Offering Nursery to Grade 12 with morning college shift.">
+<meta name="keywords" content="Geetamata School, Geetamata Secondary School, Kathmandu school, Nepal education, Bijeshwori school, Dallu school, best school Kathmandu, SEE preparation, college Kathmandu">
+<meta name="author" content="Shree Geetamata Secondary School">
+<meta name="robots" content="index, follow">
+<meta name="googlebot" content="index, follow">
+<meta name="theme-color" content="#1e3a8a">
+<meta name="msapplication-TileColor" content="#1e3a8a">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://geetamata.edu.np">
+<meta property="og:title" content="Shree Geetamata Secondary School - Kathmandu, Nepal">
+<meta property="og:description" content="Established 1961 in Bijeshwori, Dallu, Kathmandu. Excellence, Discipline & Growth. Nursery to Grade 12.">
+<meta property="og:image" content="https://i.postimg.cc/QxhJGvXz/FB-IMG-1781696784317.jpg">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ne_NP">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://geetamata.edu.np">
+<meta property="twitter:title" content="Shree Geetamata Secondary School - Kathmandu, Nepal">
+<meta property="twitter:description" content="Established 1961 in Bijeshwori, Dallu, Kathmandu. Excellence, Discipline & Growth. Nursery to Grade 12.">
+<meta property="twitter:image" content="https://i.postimg.cc/QxhJGvXz/FB-IMG-1781696784317.jpg">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://geetamata.edu.np">
+
+<!-- Favicon -->
+<link rel="icon" type="image/jpeg" href="https://i.postimg.cc/QxhJGvXz/FB-IMG-1781696784317.jpg">
+
+<!-- Structured Data / JSON-LD for Google -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "Shree Geetamata Secondary School",
+  "alternateName": "श्री गीतामाता माध्यमिक विद्यालय",
+  "url": "https://geetamata.edu.np",
+  "logo": "https://i.postimg.cc/QxhJGvXz/FB-IMG-1781696784317.jpg",
+  "image": "https://i.postimg.cc/50zTGDxK/IMG-20260617-174740.jpg",
+  "description": "Established in 1961 A.D. (2017 B.S.), Shree Geetamata Secondary School has been committed to academic excellence, discipline, and holistic development for over six decades in Kathmandu, Nepal.",
+  "foundingDate": "1961",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "KMC-15, Bijeshwori, Dallu",
+    "addressLocality": "Kathmandu",
+    "addressRegion": "Bagmati",
+    "addressCountry": "NP"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "27.6692992",
+    "longitude": "85.2525056"
+  },
+  "telephone": "+977-15671544",
+  "email": "info@geetamata.edu.np",
+  "sameAs": [
+    "https://www.facebook.com/share/1HyYTZWrNg/"
+  ],
+  "openingHours": "Mo-Fr 06:00-15:00",
+  "priceRange": "$$",
+  "areaServed": {
+    "@type": "City",
+    "name": "Kathmandu"
+  }
+}
+</script>
+
+</head>
+<body>
+<div class="top-bar">
+<a href="tel:+97715671544"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> +977-15671544</a>
+<a href="mailto:info@geetamata.edu.np"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg> info@geetamata.edu.np</a>
+<a href="https://www.facebook.com/share/1HyYTZWrNg/" target="_blank"><svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Facebook</a>
+<a href="#contact"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> <span class="en">Bijeshwori, Dallu, Kathmandu</span><span class="ne">बिजेश्वरी, दल्लु, काठमाडौं</span></a>
+<button class="lang-switch" id="langToggle" onclick="toggleLanguage()">
+<span class="en">Switch to: नेपाली</span>
+<span class="ne">Switch to: English</span>
+</button>
+</div>
+
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+<header id="mainHeader">
+<div class="logo-area">
+<img src="https://i.postimg.cc/QxhJGvXz/FB-IMG-1781696784317.jpg" alt="Logo" class="logo-img">
+<div>
+<div class="logo-text"><span class="en">Shree Geetamata Secondary School</span><span class="ne">श्री गीतामाता माध्यमिक विद्यालय</span></div>
+<div class="logo-tagline"><span class="en">Excellence &bull; Discipline &bull; Growth</span><span class="ne">उत्कृष्टता &bull; अनुशासन &bull; विकास</span></div>
+</div>
+</div>
+<button class="menu-toggle" onclick="toggleMenu()">&#9776;</button>
+<nav><ul id="navMenu">
+<li><a href="#about" onclick="closeMenu()"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg> <span class="en">About</span><span class="ne">हाम्रो बारे</span></a></li>
+<li class="dropdown" id="dropdownAdmin"><a href="#administration" onclick="toggleDropdown(event)"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> <span class="en">Administration</span><span class="ne">प्रशासन</span> <svg class="icon expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a><div class="dropdown-menu"><a href="#administration" onclick="closeMenu()"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> <span class="en">Principal</span><span class="ne">प्रधानाध्यापक</span></a><a href="#administration" onclick="closeMenu()"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> <span class="en">Vice Principal</span><span class="ne">उप-प्रधानाध्यापक</span></a><a href="#level-incharges" onclick="closeMenu()"><svg class="icon icon-2xl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> <span class="en">Level Incharges</span><span class="ne">स्तरीय संयोजक</span></a></div></li>
+<li><a href="#programs" onclick="closeMenu()"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg> <span class="en">Programs</span><span class="ne">कार्यक्रम</span></a></li>
+<li><a href="#facilities" onclick="closeMenu()"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg> <span class="en">Facilities</span><span class="ne">सुविधाहरू</span></a></li>
+<li><a href="#notices" onclick="closeMenu()"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg> <span class="en">Notices</span><span class="ne">सूचना</span></a></li>
+<li><a href="#admission" onclick="closeMenu()"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg> <span class="en">Admission</span><span class="ne">भर्ना</span></a></li>
+<li><a href="#gallery" onclick="closeMenu()"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg> <span class="en">Gallery</span><span class="ne">ग्यालरी</span></a></li>
+<li><a href="#contact" onclick="closeMenu()"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> <span class="en">Contact</span><span class="ne">सम्पर्क</span></a></li>
+</ul></nav>
+</header>
+
+<section class="hero">
+<img src="https://i.postimg.cc/QxhJGvXz/FB-IMG-1781696784317.jpg" alt="Logo" class="hero-logo">
+<h1><span class="en">Shaping Future Leaders Through Education</span><span class="ne">शिक्षाको माध्यमबाट भविष्यका नेताहरू निर्माण</span></h1>
+<p><span class="en">Shree Geetamata Secondary School &mdash; Excellence, Discipline &amp; Growth</span><span class="ne">श्री गीतामाता माध्यमिक विद्यालय &mdash; उत्कृष्टता, अनुशासन र विकास</span></p>
+<div class="btn-group">
+<button class="primary-btn" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg> <span class="en">Explore School</span><span class="ne">विद्यालय हेर्नुहोस्</span></button>
+<button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> <span class="en">Contact Us</span><span class="ne">सम्पर्क गर्नुहोस्</span></button>
+</div>
+<div class="scroll-indicator" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div>
+</section>
+
+<section id="about">
+<h2 class="section-title"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg> <span class="en">About Us</span><span class="ne">हाम्रो बारेमा</span></h2>
+<div class="about-box reveal">
+<span class="est-badge"><svg class="icon icon-2xl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> <span class="en">Est. 1961 A.D. (2017 B.S.)</span><span class="ne">स्थापना १९६१ (२०१७ साल)</span></span>
+<p class="en">Established in <strong>1961 A.D. (2017 B.S.)</strong>, Shree Geetamata Secondary School has been committed to academic excellence, discipline, and holistic development of students for over six decades in Kathmandu, Nepal.</p>
+<p class="ne"><strong>१९६१ साल (२०१७ साल)</strong> मा स्थापित, श्री गीतामाता माध्यमिक विद्यालयले छ दशकभन्दा बढी समयदेखि काठमाडौं, नेपालमा शैक्षिक उत्कृष्टता र विद्यार्थीहरूको समग्र विकासमा प्रतिबद्धता जनाउँदै आएको छ।</p>
+</div>
+</section>
+
+<section>
+<div class="stats-grid reveal">
+<div class="stat-box"><div class="stat-icon"><svg class="icon icon-2xl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div class="stat-num">60+</div><div class="stat-label"><span class="en">Years of Excellence</span><span class="ne">उत्कृष्टताका वर्ष</span></div></div>
+<div class="stat-box"><div class="stat-icon"><svg class="icon icon-2xl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg></div><div class="stat-num">5000+</div><div class="stat-label"><span class="en">Alumni</span><span class="ne">पूर्व विद्यार्थी</span></div></div>
+<div class="stat-box"><div class="stat-icon"><svg class="icon icon-2xl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="stat-num">50+</div><div class="stat-label"><span class="en">Teachers</span><span class="ne">शिक्षकहरू</span></div></div>
+<div class="stat-box"><div class="stat-icon"><svg class="icon icon-2xl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><div class="stat-num">5</div><div class="stat-label"><span class="en">Facilities</span><span class="ne">सुविधाहरू</span></div></div>
+</div>
+</section>
+
+<section id="administration">
+<h2 class="section-title"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> <span class="en">Our Administration</span><span class="ne">हाम्रो प्रशासन</span></h2>
+
+<div class="admin-card reveal" id="principalCard">
+<div class="admin-card-header" onclick="toggleAdminCard('principalCard')">
+<img src="https://via.placeholder.com/150" alt="Principal">
+<div class="admin-card-content" style="flex:1">
+<h3>Hari Krishna Shrestha</h3>
+<div class="role"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> <span class="en">Principal</span><span class="ne">प्रधानाध्यापक</span></div>
+<div class="quote-preview"><svg class="icon icon-sm" viewBox="0 0 24 24" fill="currentColor"><path d="M11.192 15.757c0-.88-.23-1.618-.69-2.217-.326-.412-.768-.683-1.327-.812-.55-.128-1.07-.137-1.54-.028-.16-.95.1-1.956.76-3.022.66-1.065 1.515-1.867 2.558-2.403L9.373 5c-.8.396-1.56.898-2.26 1.505-.71.607-1.34 1.305-1.9 2.094s-.98 1.68-1.25 2.69-.346 2.04-.217 3.1c.168 1.4.62 2.52 1.356 3.35.735.84 1.652 1.26 2.748 1.26.965 0 1.766-.29 2.4-.878.628-.576.94-1.365.94-2.368l.002.003zm9.124 0c0-.88-.23-1.618-.69-2.217-.326-.42-.768-.695-1.327-.825-.55-.13-1.07-.14-1.54-.03-.16-.94.09-1.95.75-3.02.66-1.06 1.514-1.86 2.557-2.4L18.49 5c-.8.396-1.555.898-2.26 1.505-.708.607-1.34 1.305-1.894 2.094-.556.79-.97 1.68-1.24 2.69-.273 1-.345 2.04-.217 3.1.168 1.4.62 2.52 1.356 3.35.735.84 1.652 1.26 2.748 1.26.965 0 1.766-.29 2.4-.878.628-.576.94-1.365.94-2.368h.007z"/></svg> <span class="en">"Education should be fun, not boring."</span><span class="ne">"शिक्षा रमाइलो हुनुपर्छ, नीरस होइन।"</span></div>
+<div class="expand-hint"><svg class="icon expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg> <span class="en">Click to read more</span><span class="ne">थप पढ्न क्लिक गर्नुहोस्</span></div>
+</div>
+<svg class="icon expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+</div>
+<div class="admin-card-body">
+<div class="story-text">
+<div class="story-title"><svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg> <span class="en">A Leader Who Brings Joy to Learning</span><span class="ne">सिकाइमा खुशी ल्याउने नेतृत्व</span></div>
+<p class="en">Principal Hari Krishna Shrestha believes that a happy student is a successful student. He makes everything fun &mdash; whether it is a morning assembly, a classroom lesson, or a staff meeting. Every now and then, he cracks a joke or shares a light moment that makes the entire school laugh, helping students and teachers alike concentrate better on their studies. His unique approach creates a warm, welcoming environment where students feel motivated to learn, not pressured. Under his leadership, Shree Geetamata has become a place where discipline and joy go hand in hand.</p>
+<p class="ne">प्रधानाध्यापक हरि कृष्ण श्रेष्ठ विश्वास गर्नुहुन्छ कि खुसी विद्यार्थी सफल विद्यार्थी हुन्छ। उहाँले हरेक कुरा रमाइलो बनाउनुहुन्छ &mdash; चाहे बिहानको प्रार्थना सभा हो, कक्षाकोठाको पाठ हो, वा शिक्षक बैठक। समय समयमा उहाँले मजाक गर्नुहुन्छ वा हल्का क्षण साझा गर्नुहुन्छ जसले सम्पूर्ण विद्यालयलाई हँसाउँछ, विद्यार्थी र शिक्षक दुवैलाई अध्ययनमा राम्रोसँग ध्यान केन्द्रित गर्न मद्दत गर्छ। उहाँको अद्वितीय दृष्टिकोणले विद्यार्थीहरूले दबाब महसुस नगरी सिक्न प्रेरित हुने तातो, स्वागतयोग्य वातावरण सिर्जना गर्छ। उहाँको नेतृत्वमा, श्री गीतामाता अनुशासन र खुशी सँगै हिँड्ने ठाउँ बनेको छ।</p>
+</div>
+</div>
+</div>
+
+<div class="admin-card reveal reveal-delay-1" id="vpCard">
+<div class="admin-card-header" onclick="toggleAdminCard('vpCard')">
+<img src="https://via.placeholder.com/150" alt="Vice Principal">
+<div class="admin-card-content" style="flex:1">
+<h3>Ram Prasad Devkota</h3>
+<div class="role"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> <span class="en">Vice Principal</span><span class="ne">उप-प्रधानाध्यापक</span></div>
+<div class="quote-preview"><svg class="icon icon-sm" viewBox="0 0 24 24" fill="currentColor"><path d="M11.192 15.757c0-.88-.23-1.618-.69-2.217-.326-.412-.768-.683-1.327-.812-.55-.128-1.07-.137-1.54-.028-.16-.95.1-1.956.76-3.022.66-1.065 1.515-1.867 2.558-2.403L9.373 5c-.8.396-1.56.898-2.26 1.505-.71.607-1.34 1.305-1.9 2.094s-.98 1.68-1.25 2.69-.346 2.04-.217 3.1c.168 1.4.62 2.52 1.356 3.35.735.84 1.652 1.26 2.748 1.26.965 0 1.766-.29 2.4-.878.628-.576.94-1.365.94-2.368l.002.003zm9.124 0c0-.88-.23-1.618-.69-2.217-.326-.42-.768-.695-1.327-.825-.55-.13-1.07-.14-1.54-.03-.16-.94.09-1.95.75-3.02.66-1.06 1.514-1.86 2.557-2.4L18.49 5c-.8.396-1.555.898-2.26 1.505-.708.607-1.34 1.305-1.894 2.094-.556.79-.97 1.68-1.24 2.69-.273 1-.345 2.04-.217 3.1.168 1.4.62 2.52 1.356 3.35.735.84 1.652 1.26 2.748 1.26.965 0 1.766-.29 2.4-.878.628-.576.94-1.365.94-2.368h.007z"/></svg> <span class="en">"I want every student of mine to get educated."</span><span class="ne">"म चाहन्छु मेरो हरेक विद्यार्थीले शिक्षा पाओस्।"</span></div>
+<div class="expand-hint"><svg class="icon expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg> <span class="en">Click to read more</span><span class="ne">थप पढ्न क्लिक गर्नुहोस्</span></div>
+</div>
+<svg class="icon expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+</div>
+<div class="admin-card-body">
+<div class="story-text">
+<div class="story-title"><svg class="icon icon-sm" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> <span class="en">A Guardian Who Never Says No</span><span class="ne">कहिल्यै &ldquo;होइन&rdquo; नभन्ने संरक्षक</span></div>
+<p class="en">Vice Principal Ram Prasad Devkota is known for his unwavering dedication to every student. No matter where you need to go &mdash; government offices, paper work related offices, or anywhere else for documentation &mdash; he will personally accompany you and make sure everything is handled. Got a headache with documents? He is ready to sort it out. His only wish is that every single student gets educated and builds a bright future. With his full support and guidance, students at Shree Geetamata never feel alone in their academic journey. He takes his time with each student, ensuring no one is left behind.</p>
+<p class="ne">उप-प्रधानाध्यापक राम प्रसाद देवकोटा हरेक विद्यार्थीप्रति अटल समर्पणका लागि परिचित हुनुहुन्छ। तपाईंलाई जहाँ जानुपर्छ &mdash; सरकारी कार्यालय, कागजात सम्बन्धी कार्यालय, वा कागजातका लागि अरू कतै &mdash; उहाँ व्यक्तिगत रूपमा साथ दिनुहुन्छ र सबै ठीकठाक भएको सुनिश्चित गर्नुहुन्छ। कागजातसँग समस्या छ? उहाँ तयार हुनुहुन्छ। उहाँको एकमात्र इच्छा हो कि हरेक विद्यार्थीले शिक्षा पाओस् र उज्ज्वल भविष्य बनाओस्। उहाँको पूर्ण समर्थन र मार्गदर्शनमा, श्री गीतामाताका विद्यार्थीहरूले आफ्नो शैक्षिक यात्रामा एक्लो महसुस गर्दैनन्। उहाँले प्रत्येक विद्यार्थीसँग समय लिनुहुन्छ, कसैलाई पछाडि छोडिन्छ भनेर सुनिश्चित गर्दै।</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="level-incharges">
+<h2 class="section-title"><svg class="icon icon-2xl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> <span class="en">Level Incharges</span><span class="ne">स्तरीय संयोजक</span></h2>
+<div class="incharge-grid reveal">
+<div class="incharge-card"><div class="incharge-icon"><svg class="icon icon-2xl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg></div><h4>Bina Tandukari</h4><div class="role"><span class="en">Secondary Level Incharge</span><span class="ne">माध्यमिक स्तर संयोजक</span></div></div>
+<div class="incharge-card"><div class="incharge-icon"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg></div><h4>Bipin Kumar Sharma</h4><div class="role"><span class="en">Primary Level Incharge</span><span class="ne">प्राथमिक स्तर संयोजक</span></div></div>
+</div>
+</section>
+<section id="programs">
+<h2 class="section-title"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg> <span class="en">Academic Programs</span><span class="ne">शैक्षिक कार्यक्रमहरू</span></h2>
+<div class="programs-grid reveal">
+<div class="program-card"><div class="program-icon"><svg class="icon icon-2xl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M12 11v8"/><path d="M9 17h6"/><path d="M8 22h8"/></svg></div><h3><span class="en">Early Childhood</span><span class="ne">प्रारम्भिक बाल्यकाल</span></h3><p><span class="en">Nursery, LKG, and UKG with play-based learning, foundational skills, and moral values.</span><span class="ne">नर्सरी, एलकेजी र युकेजी खेलमूलक सिकाइ, आधारभूत सीप र नैतिक मूल्यहरू।</span></p></div>
+<div class="program-card"><div class="program-icon"><svg class="icon icon-2xl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v10"/><path d="M12 6V4a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v2"/><path d="M8 6V4a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v2"/><path d="M2 14h20"/><path d="M12 14v6"/></svg></div><h3><span class="en">Basic Education</span><span class="ne">आधारभूत शिक्षा</span></h3><p><span class="en">Grades 1 to 8 with comprehensive curriculum, practical learning, and skill development.</span><span class="ne">कक्षा १ देखि ८ व्यापक पाठ्यक्रम, व्यावहारिक सिकाइ र सीप विकास।</span></p></div>
+<div class="program-card"><div class="program-icon"><svg class="icon icon-2xl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div><h3><span class="en">Secondary Level</span><span class="ne">माध्यमिक तह</span></h3><p><span class="en">Grades 9-10 (SEE) with science, management, and humanities streams preparation. Civil Engineering classes also available.</span><span class="ne">कक्षा ९-१० (SEE) विज्ञान, व्यवस्थापन र मानविकी विषय तयारी। सिभिल इन्जिनियरिङ कक्षा पनि उपलब्ध।</span></p></div>
+<div class="program-card"><div class="program-icon"><svg class="icon icon-2xl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg></div><h3><span class="en">Higher Secondary</span><span class="ne">उच्च माध्यमिक</span></h3><p><span class="en">Grades 11-12 (Morning Shift: 6:00 AM - 9:45 AM) with full college-level curriculum.</span><span class="ne">कक्षा ११-१२ (बिहानको शिफ्ट: बिहान ६:०० - ९:४५) पूर्ण कलेज स्तरको पाठ्यक्रम।</span></p></div>
+<div class="program-card"><div class="program-icon"><svg class="icon icon-2xl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></div><h3><span class="en">Extra Activities</span><span class="ne">अतिरिक्त गतिविधिहरू</span></h3><p><span class="en">Sports, Book Free Friday, Red Cross, Nibhandha Competition, Debate, and Child Clubs for holistic development.</span><span class="ne">खेलकुद, बुक फ्रि फ्राइडे, रेड क्रस, निबन्ध प्रतियोगिता, वादविवाद र बाल क्लब।</span></p></div>
+</div>
+</section>
+
+<section id="facilities">
+<h2 class="section-title"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg> <span class="en">Our Facilities</span><span class="ne">सुविधाहरू</span></h2>
+<div class="facility-grid reveal">
+<div class="facility-box" onclick="showFacility('library')"><div class="facility-icon"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg></div><span class="en">Library</span><span class="ne">पुस्तकालय</span></div>
+<div class="facility-box" onclick="showFacility('science-lab')"><div class="facility-icon"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 2v7.31"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/><path d="M5.52 16h12.96"/></svg></div><span class="en">Science Lab</span><span class="ne">विज्ञान प्रयोगशाला</span></div>
+<div class="facility-box" onclick="showFacility('computer-lab')"><div class="facility-icon"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><span class="en">Computer Lab</span><span class="ne">कम्प्युटर ल्याब</span></div>
+<div class="facility-box" onclick="showFacility('nurse-room')"><div class="facility-icon"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></svg></div><span class="en">Nurse Room</span><span class="ne">स्वास्थ्य कक्ष</span></div>
+<div class="facility-box" onclick="showFacility('engineering')"><div class="facility-icon"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"/><path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg></div><span class="en">Engineering Dept.</span><span class="ne">इन्जिनियरिङ विभाग</span></div>
+</div>
+
+<div class="facility-preview" id="preview-library">
+<h3><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg> <span class="en">Library</span><span class="ne">पुस्तकालय</span></h3>
+<p class="en">Well-stocked with thousands of books and digital resources in a quiet reading space.</p>
+<p class="ne">शान्त पठन स्थानमा हजारौं पुस्तक र डिजिटल स्रोतहरू।</p>
+<div class="preview-images"><img src="https://via.placeholder.com/400x250?text=Library" alt="Library"></div>
+</div>
+<div class="facility-preview" id="preview-science-lab">
+<h3><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 2v7.31"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/><path d="M5.52 16h12.96"/></svg> <span class="en">Science Lab</span><span class="ne">विज्ञान प्रयोगशाला</span></h3>
+<p class="en">Modern equipment for Physics, Chemistry &amp; Biology experiments.</p>
+<p class="ne">भौतिक, रसायन र जीवविज्ञान प्रयोगका लागि आधुनिक उपकरण।</p>
+<div class="preview-images"><img src="https://via.placeholder.com/400x250?text=Science+Lab" alt="Science Lab"></div>
+</div>
+<div class="facility-preview" id="preview-computer-lab">
+<h3><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> <span class="en">Computer Lab</span><span class="ne">कम्प्युटर ल्याब</span></h3>
+<p class="en">Latest computers with internet for programming &amp; digital learning.</p>
+<p class="ne">प्रोग्रामिङ र डिजिटल सिकाइका लागि इन्टरनेटसहित कम्प्युटर।</p>
+<div class="preview-images"><img src="https://via.placeholder.com/400x250?text=Computer+Lab" alt="Computer Lab"></div>
+</div>
+<div class="facility-preview" id="preview-nurse-room">
+<h3><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></svg> <span class="en">Nurse Room</span><span class="ne">स्वास्थ्य कक्ष</span></h3>
+<p class="en">Qualified nurse for student health &amp; emergencies during school hours.</p>
+<p class="ne">विद्यालय समयमा स्वास्थ्य र आपतकालका लागि योग्य नर्स।</p>
+<div class="preview-images"><img src="https://via.placeholder.com/400x250?text=Nurse+Room" alt="Nurse Room"></div>
+</div>
+<div class="facility-preview" id="preview-engineering">
+<h3><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"/><path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg> <span class="en">Engineering Dept.</span><span class="ne">इन्जिनियरिङ विभाग</span></h3>
+<p class="en">Civil engineering drawing, surveying, and technical skills for future engineers.</p>
+<p class="ne">भविष्यका इन्जिनियरका लागि सिभिल इन्जिनियरिङ ड्राइङ, सर्वेक्षण र प्राविधिक सीप।</p>
+<div class="preview-images"><img src="https://via.placeholder.com/400x250?text=Engineering" alt="Engineering"></div>
+</div>
+</section>
+
+<section id="notices">
+<h2 class="section-title"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg> <span class="en">Notices &amp; Updates</span><span class="ne">सूचना र अपडेटहरू</span></h2>
+<div class="notices-grid reveal">
+<div class="notice-card">
+<div class="notice-header"><span class="notice-badge" style="background:#dc2626;color:#fff;">EXAM</span><span class="notice-date">Asar 25, 2083</span></div>
+<h3><span class="en">Exams for Grades Up to 10</span><span class="ne">कक्षा १० सम्मका परीक्षाहरू</span></h3>
+<p><span class="en">Final examinations for all grades up to 10 will be held on Asar 25. All students must arrive on time with necessary materials.</span><span class="ne">कक्षा १० सम्मका सबै अन्तिम परीक्षाहरू असार २५ गते हुनेछन्। सबै विद्यार्थीहरू समयमै आवश्यक सामग्रीहरूसहित उपस्थित हुनुपर्छ।</span></p>
+</div>
+<div class="notice-card">
+<div class="notice-header"><span class="notice-badge">NEW</span><span class="notice-date">June 2026</span></div>
+<h3><span class="en">Admission Open for 2083</span><span class="ne">२०८३ को भर्ना खुला</span></h3>
+<p><span class="en">Admissions are now open for the academic year 2083 BS. Visit the school office or contact us for enrollment details.</span><span class="ne">शैक्षिक सत्र २०८३ का लागि भर्ना खुला भएको छ। भर्ना विवरणका लागि विद्यालय कार्यालयमा सम्पर्क गर्नुहोस्।</span></p>
+</div>
+<div class="notice-card">
+<div class="notice-header"><span class="notice-badge event">EVENT</span><span class="notice-date">Coming Soon</span></div>
+<h3><span class="en">Annual Sports Day 2083</span><span class="ne">वार्षिक खेलकुद दिवस २०८३</span></h3>
+<p><span class="en">Get ready for our annual sports day! Students from all levels will participate in various competitions.</span><span class="ne">हाम्रो वार्षिक खेलकुद दिवसको लागि तयार हुनुहोस्! सबै स्तरका विद्यार्थीहरूले विभिन्न प्रतिस्पर्धामा भाग लिनेछन्।</span></p>
+</div>
+</div>
+</section>
+
+<section id="gallery">
+<h2 class="section-title"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg> <span class="en">Gallery</span><span class="ne">ग्यालरी</span></h2>
+<div class="gallery reveal">
+<img src="https://via.placeholder.com/300x200" alt="Gallery 1">
+<img src="https://via.placeholder.com/300x200" alt="Gallery 2">
+<img src="https://via.placeholder.com/300x200" alt="Gallery 3">
+<img src="https://via.placeholder.com/300x200" alt="Gallery 4">
+</div>
+</section>
+
+<section id="admission">
+<h2 class="section-title"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg> <span class="en">Admission Process</span><span class="ne">भर्ना प्रक्रिया</span></h2>
+<div class="about-box reveal" style="text-align:center;">
+<p style="font-size:16px;line-height:1.8;"><span class="en">Interested students and parents are welcome to visit the school office for admission inquiries and further information. Our staff will guide you through the entire enrollment process.</span><span class="ne">इच्छुक विद्यार्थी र अभिभावकहरूलाई भर्ना सम्बन्धी जानकारी र थप विवरणका लागि विद्यालय कार्यालयमा आउन हार्दिक निमन्त्रणा छ। हाम्रो कर्मचारीले तपाईंलाई सम्पूर्ण भर्ना प्रक्रियामा मार्गदर्शन गर्नेछ।</span></p>
+</div>
+</section>
+
+<section id="contact">
+<h2 class="section-title"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> <span class="en">Contact Us</span><span class="ne">सम्पर्क</span></h2>
+<div class="contact reveal">
+<p><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> <span class="en">KMC-15, Bijeshwori, Dallu, Kathmandu, Nepal</span><span class="ne">काठमाडौं महानगरपालिका-१५, बिजेश्वरी, दल्लु, काठमाडौं, नेपाल</span></p>
+<p><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg> <a href="mailto:info@geetamata.edu.np">info@geetamata.edu.np</a></p>
+<p><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> <a href="tel:+97715671544">+977-15671544</a></p>
+<p><svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> <a href="https://www.facebook.com/share/1HyYTZWrNg/" target="_blank"><span class="en">Facebook Page</span><span class="ne">फेसबुक पेज</span></a></p>
+</div>
+<div class="map-container">
+<!-- PASTE YOUR REAL GOOGLE MAPS EMBED HERE -->
+<!-- Go to https://maps.google.com, search "Shree Geetamata Secondary School", click Share > Embed a map, copy the iframe code and replace below -->
+<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d452294.7802748213!2d85.2525056!3d27.6692992!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb18f40d0a7ee7%3A0x205b2d237cb19922!2sGeetamata%20Community%20College!5e0!3m2!1sen!2snp!4v1781746015929!5m2!1sen!2snp" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+</section>
+
+<footer>
+<div class="footer-links">
+<a href="#about"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg> <span class="en">About</span><span class="ne">बारे</span></a>
+<a href="#administration"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> <span class="en">Admin</span><span class="ne">प्रशासन</span></a>
+<a href="#programs"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg> <span class="en">Programs</span><span class="ne">कार्यक्रम</span></a>
+<a href="#facilities"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg> <span class="en">Facilities</span><span class="ne">सुविधा</span></a>
+<a href="#notices"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg> <span class="en">Notices</span><span class="ne">सूचना</span></a>
+<a href="#admission"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg> <span class="en">Admission</span><span class="ne">भर्ना</span></a>
+<a href="#gallery"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg> <span class="en">Gallery</span><span class="ne">ग्यालरी</span></a>
+<a href="#contact"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> <span class="en">Contact</span><span class="ne">सम्पर्क</span></a>
+</div>
+<p>&copy; 2026 Shree Geetamata Secondary School</p>
+<p style="margin-top:6px;"><svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg> <span class="en">Developed by Farhan Khan</span><span class="ne">फरहान खान द्वारा विकसित</span></p>
+</footer>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg></button>
+
+<script>
+function toggleLanguage(){
+  document.body.classList.toggle('show-ne');
+  var b=document.getElementById('langToggle');
+  if(document.body.classList.contains('show-ne')){b.classList.add('nepali-active');}
+  else{b.classList.remove('nepali-active');}
+}
+function toggleMenu(){
+  document.getElementById('navMenu').classList.toggle('active');
+  document.getElementById('overlay').classList.toggle('active');
+}
+function closeMenu(){
+  document.getElementById('navMenu').classList.remove('active');
+  document.getElementById('overlay').classList.remove('active');
+}
+function toggleDropdown(e){
+  if(window.innerWidth<=768){e.preventDefault();document.getElementById('dropdownAdmin').classList.toggle('active');}
+}
+function toggleAdminCard(cardId){
+  var card=document.getElementById(cardId);
+  var body=card.querySelector('.admin-card-body');
+  card.classList.toggle('open');
+  body.classList.toggle('open');
+}
+function showFacility(f){
+  document.querySelectorAll('.facility-preview').forEach(function(p){p.classList.remove('show')});
+  document.querySelectorAll('.facility-box').forEach(function(b){b.classList.remove('active')});
+  var pv=document.getElementById('preview-'+f);
+  if(pv){pv.classList.add('show');setTimeout(function(){pv.scrollIntoView({behavior:'smooth',block:'nearest'})},100);}
+  var boxes=document.querySelectorAll('.facility-box');
+  boxes.forEach(function(b){if(b.getAttribute('onclick')&&b.getAttribute('onclick').includes("'"+f+"'")){b.classList.add('active')}});
+}
+window.addEventListener('scroll',function(){
+  var h=document.getElementById('mainHeader');
+  if(window.scrollY>50)h.classList.add('scrolled');else h.classList.remove('scrolled');
+  document.querySelectorAll('.reveal').forEach(function(el){
+    var wt=window.scrollY+window.innerHeight;
+    var et=el.offsetTop+100;
+    if(wt>et)el.classList.add('active');
+  });
+  var s=document.querySelectorAll('section[id]');
+  var n=document.querySelectorAll('nav ul li a:not(.dropdown-menu a)');
+  var c='';
+  s.forEach(function(x){if(window.scrollY>=x.offsetTop-120)c=x.getAttribute('id')});
+  n.forEach(function(l){l.classList.remove('active-link');if(l.getAttribute('href')==='#'+c)l.classList.add('active-link')});
+  var b=document.getElementById('backToTop');
+  if(window.scrollY>500)b.classList.add('visible');else b.classList.remove('visible');
+});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu()});
+</script>
+</body>
+</html>
